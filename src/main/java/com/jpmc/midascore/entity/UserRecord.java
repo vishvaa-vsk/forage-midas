@@ -1,12 +1,13 @@
 package com.jpmc.midascore.entity;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 public class UserRecord {
 
     @Id
-    @GeneratedValue()
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(nullable = false)
@@ -14,6 +15,12 @@ public class UserRecord {
 
     @Column(nullable = false)
     private float balance;
+
+    @OneToMany(mappedBy = "sender")
+    private List<TransactionRecord> sentTransactions;
+
+    @OneToMany(mappedBy = "recipient")
+    private List<TransactionRecord> receivedTransactions;
 
     protected UserRecord() {
     }
