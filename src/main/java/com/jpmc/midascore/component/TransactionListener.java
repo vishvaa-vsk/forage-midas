@@ -58,5 +58,18 @@ public class TransactionListener {
         } else {
             System.out.println("Invalid transaction: " + transaction);
         }
+
+        // Log the balance of the "wilbur" user
+        logWilburBalance();
+    }
+
+    private void logWilburBalance() {
+        Optional<UserRecord> wilburOpt = userRepository.findById(10L); // Assuming "wilbur" has ID 10
+        if (wilburOpt.isPresent()) {
+            UserRecord wilbur = wilburOpt.get();
+            System.out.println("Wilbur's balance: " + Math.floor(wilbur.getBalance()));
+        } else {
+            System.out.println("Wilbur user not found.");
+        }
     }
 }
